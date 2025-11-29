@@ -339,7 +339,7 @@ async function exportAllFiles() {
         return;
     }
     
-    // Save current selections
+    // Save current selections before exporting
     saveCurrentSelections();
     
     let totalExported = 0;
@@ -348,20 +348,30 @@ async function exportAllFiles() {
     
     showLoading();
     
+    // Debug: Log what we're about to export
+    console.log('Exporting files:', Array.from(filesData.entries()).map(([name, data]) => ({
+        name,
+        selectedCount: data.selectedRows.size,
+        totalRows: data.data.length - 1
+    })));
+    
     for (const [fileName, fileData] of filesData) {
         if (fileData.selectedRows.size === 0) {
+            console.log(`Skipping ${fileName} - no selections`);
             continue;
         }
         
         filesWithSelections++;
         
         try {
+            console.log(`Exporting ${fileName} with ${fileData.selectedRows.size} rows`);
             await exportSingleFile(fileName, fileData.data, fileData.selectedRows);
             totalExported += fileData.selectedRows.size;
             
             // Small delay between downloads
             await new Promise(resolve => setTimeout(resolve, 300));
         } catch (error) {
+            console.error(`Error exporting ${fileName}:`, error);
             errorFiles.push(`${fileName}: ${error.message}`);
         }
     }
