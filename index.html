@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support Export File</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="header-left">
+                    <h1>📊 Xin chào chị Thơm</h1>
+                </div>
+                <div class="header-right">
+                    <label for="fileInput" class="btn-header btn-upload-header">
+                        📤 Tải lên
+                        <input type="file" id="fileInput" accept=".xlsx,.xls" multiple hidden>
+                    </label>
+                    <button id="exportBtn" class="btn-header btn-export-header">📥 Xuất Hàng Loạt</button>
+                </div>
+            </div>
+        </header>
+
+        <div id="fileList" class="file-list" style="display: none;">
+            <h3>📁 Danh Sách File (<span id="fileCount">0</span>)</h3>
+            <div id="fileItems" class="file-items"></div>
+        </div>
+
+        <div class="table-container">
+            <div class="table-wrapper">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th class="checkbox-col"></th>
+                            <th>Mã sản phẩm</th>
+                            <th>Sản phẩm</th>
+                            <th>Lượt truy cập sản phẩm</th>
+                            <th>Sản phẩm (Thêm vào giỏ hàng)</th>
+                            <th>Sản phẩm (Đơn đã xác nhận)</th>
+                            <th>Doanh số (Đơn đã xác nhận) (VND)</th>
+                            <th>Tỷ lệ chuyển đổi (Đơn đã xác nhận)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <tr class="empty-row">
+                            <td colspan="8" class="empty-message">
+                                📂 Bạn cần tải file lên để xem dữ liệu
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Đang xử lý file...</p>
+        </div>
+
+        <!-- Toast Notifications -->
+        <div id="toastContainer" class="toast-container"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs@4.3.0/dist/exceljs.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
